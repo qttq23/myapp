@@ -1,0 +1,12 @@
+{
+    "include": [
+        "src/**/*", "typing/**/*",
+    ],
+    "allowJs": true,
+    "compilerOptions": {
+        "noImplicitAny": true,
+        "target": "es5",
+        "outDir": "output",
+        "esModuleInterop": true 
+    }
+}
