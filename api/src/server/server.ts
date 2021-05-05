@@ -1,6 +1,7 @@
 
 import express from 'express';
 import { Todo } from '../model/Todo';
+const http = require('http');
 
 export interface ServerConfig {
     port: number;
@@ -10,11 +11,15 @@ export interface ServerConfig {
 export class Server {
     config: ServerConfig;
     private _app: express.Application;
+    private _server: any;
+    private _sockets: Array<any>;
 
     constructor(serverConfig: ServerConfig) {
 
         this.config = serverConfig;
         this._app = express();
+        this._server = null;
+        this._sockets = [];
         this._setup(this._app, this.config.db);
 
     }
@@ -65,10 +70,27 @@ export class Server {
         let app = this._app;
         let port = this.config.port;
 
-        app.listen(port, () => {
+        this._server = app.listen(port, () => {
             console.log(`⚡️[server]: Server is running at https://localhost:${port}`);
         });
 
+        // track sockets for later close server
+        this._server.on('connection', (socket: any) => {
+            this._sockets.push(socket);
+        });
+
+    }
+
+    public stop() {
+
+        this._sockets.forEach((socket: any)=>{
+            socket.destroy();
+            console.log('1 connection killed');
+        });
+
+        this._server.close(()=>{
+            console.log('server closed');
+        });
     }
 
 }

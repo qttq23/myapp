@@ -10,7 +10,10 @@ describe('server', () => {
 
     it('start', async () => {
 
-        fs.unlinkSync('./xb.json');
+        try {
+            fs.unlinkSync('./xb.json');
+        } catch (error) { }
+
         let db = Db.from('./xb.json');
         let server = new Server({
             port: 10000,
@@ -35,6 +38,12 @@ describe('server', () => {
         assert.strictEqual(response3.data.result.length, 1);
         assert.strictEqual(response3.data.result[0].text, 'Fred');
 
+        // close
+        server.stop();
+
+        try {
+            fs.unlinkSync('./xb.json');
+        } catch (error) { }
     });
 
 
