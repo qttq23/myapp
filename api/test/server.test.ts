@@ -5,8 +5,8 @@ const fs = require('fs');
 import { Db } from '../src/db/db';
 import { Server, ServerConfig } from '../src/server/server';
 
-describe('server', () => {
-    // this.timeout(10000);
+describe('server', function (this) {
+    this.timeout(10000);
 
     it('start', async () => {
 

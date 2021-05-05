@@ -4,7 +4,7 @@
   "description": "",
   "main": "output/index.js",
   "scripts": {
-    "test": "mocha --require ts-node/register --timeout 10000 test/**/*.test.ts",
+    "test": "mocha --require ts-node/register test/**/*.test.ts",
     "build": "tsc",
     "start": "node .",
     "dev": "npm run build & npm run start",
