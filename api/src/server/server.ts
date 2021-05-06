@@ -1,7 +1,7 @@
 
 import express from 'express';
 import { Todo } from '../model/Todo';
-const http = require('http');
+var cors = require('cors');
 
 export interface ServerConfig {
     port: number;
@@ -26,7 +26,9 @@ export class Server {
 
     private _setup(app: express.Application, db: any): void {
 
+        app.use(cors());
         app.use(express.json());
+        app.use('/build', express.static('build'));
         app.get('/', (req, res) => res.send('Express + TypeScript: ' + new Date().toLocaleString()));
 
         /** get full list of todo */
