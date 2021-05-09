@@ -1,0 +1,39 @@
+{
+	"name": "ui ext",
+	"version": "2.0",
+	"description": "Build an Extension!",
+	"manifest_version": 2,
+	"permissions": [
+		"declarativeContent",
+		"activeTab",
+		"tabs",
+		"storage"
+	],
+	"background": {
+		"scripts": [
+			"background.js"
+
+		],
+		"persistent": false
+	},
+	"content_scripts": [
+		{
+			"matches": [
+				"<all_urls>"
+			],
+			"js": [
+				"contentScript.js"
+			]
+		}
+	],
+	"browser_action": {
+		"default_icon": {
+			"16": "hello_extensions.png"
+		}
+	},
+	"web_accessible_resources": [
+		""
+	],
+	"content_security_policy": "script-src 'self' 'sha256-296WwBITi6We6JOJXRuI3FMKc70ntPmFBH7zjSsWPIQ='; object-src 'self'"
+
+}

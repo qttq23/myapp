@@ -1,0 +1,1 @@
+https://stackoverflow.com/questions/8502307/chrome-version-18-how-to-allow-inline-scripting-with-a-content-security-policy
